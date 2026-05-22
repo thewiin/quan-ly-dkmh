@@ -1,67 +1,69 @@
-import { Layout, Menu } from 'antd';
 import {
   DashboardOutlined,
   BookOutlined,
   CalendarOutlined,
   DollarOutlined,
   UserOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
-import { useNavigate } from 'react-router-dom';
+import { Layout, Menu } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 
-function Sidebar() {
+export default function Sidebar() {
   const navigate = useNavigate();
 
   return (
-    <Sider width={240} theme="dark">
-      <div
-        style={{
-          color: 'white',
-          fontSize: 24,
-          padding: 20,
-          textAlign: 'center',
-          fontWeight: 'bold',
-        }}
-      >
-        DKMH
+    <Sider
+      width={240}
+      style={{
+        background: "#17308f",
+      }}
+    >
+      <div className="logo">
+        <h2 style={{ color: "white", padding: 20 }}>
+          PNUni
+        </h2>
       </div>
 
       <Menu
         theme="dark"
         mode="inline"
-        onClick={({ key }) => navigate(key)}
+        defaultSelectedKeys={["1"]}
+        style={{
+          background: "#17308f",
+          border: "none",
+        }}
         items={[
           {
-            key: '/dashboard',
+            key: "1",
             icon: <DashboardOutlined />,
-            label: 'Dashboard',
+            label: "Dashboard",
+            onClick: () => navigate("/"),
           },
           {
-            key: '/dang-ky',
+            key: "2",
             icon: <BookOutlined />,
-            label: 'Đăng ký môn',
+            label: "Đăng ký môn",
           },
           {
-            key: '/thoi-khoa-bieu',
+            key: "3",
             icon: <CalendarOutlined />,
-            label: 'Thời khóa biểu',
+            label: "Thời khóa biểu",
           },
           {
-            key: '/hoc-phi',
+            key: "4",
             icon: <DollarOutlined />,
-            label: 'Học phí',
+            label: "Học phí",
           },
           {
-            key: '/profile',
+            key: "5",
             icon: <UserOutlined />,
-            label: 'Cá nhân',
+            label: "Hồ sơ cá nhân",
           },
         ]}
       />
     </Sider>
   );
 }
-
-export default Sidebar;
