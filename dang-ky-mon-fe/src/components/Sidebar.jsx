@@ -1,13 +1,13 @@
-import { Layout, Menu } from "antd";
-
+import { Layout, Menu } from 'antd';
 import {
   DashboardOutlined,
   BookOutlined,
   CalendarOutlined,
   DollarOutlined,
-} from "@ant-design/icons";
+  UserOutlined,
+} from '@ant-design/icons';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const { Sider } = Layout;
 
@@ -15,16 +15,14 @@ function Sidebar() {
   const navigate = useNavigate();
 
   return (
-    <Sider
-      width={250}
-      style={{ minHeight: "100vh" }}
-    >
+    <Sider width={240} theme="dark">
       <div
         style={{
-          color: "white",
+          color: 'white',
           fontSize: 24,
           padding: 20,
-          textAlign: "center",
+          textAlign: 'center',
+          fontWeight: 'bold',
         }}
       >
         DKMH
@@ -36,24 +34,29 @@ function Sidebar() {
         onClick={({ key }) => navigate(key)}
         items={[
           {
-            key: "/dashboard",
+            key: '/dashboard',
             icon: <DashboardOutlined />,
-            label: "Dashboard",
+            label: 'Dashboard',
           },
           {
-            key: "/dang-ky",
+            key: '/dang-ky',
             icon: <BookOutlined />,
-            label: "Đăng ký môn",
+            label: 'Đăng ký môn',
           },
           {
-            key: "/thoi-khoa-bieu",
+            key: '/thoi-khoa-bieu',
             icon: <CalendarOutlined />,
-            label: "Thời khóa biểu",
+            label: 'Thời khóa biểu',
           },
           {
-            key: "/hoc-phi",
+            key: '/hoc-phi',
             icon: <DollarOutlined />,
-            label: "Học phí",
+            label: 'Học phí',
+          },
+          {
+            key: '/profile',
+            icon: <UserOutlined />,
+            label: 'Cá nhân',
           },
         ]}
       />

@@ -1,55 +1,23 @@
 import {
-  Table,
-  Button,
-  Card,
-  message,
   Progress,
-} from "antd";
+  Table,
+  Tag,
+} from 'antd';
 
-import MainLayout from "../src/layout/MainLayout.jsx";
-
-import axiosClient from "../src/api/axiosClient.js";
-
-import { useEffect, useState } from "react";
+import MainLayout from '../../layouts/MainLayout';
 
 function DangKyPage() {
-  const [courses, setCourses] = useState([]);
-
-  useEffect(() => {
-    loadCourses();
-  }, []);
-
-  const loadCourses = async () => {
-    const res = await axiosClient.get(
-      "/lophocphan"
-    );
-
-    setCourses(res.data);
-  };
-
-  const dangKy = async (record) => {
-    try {
-      await axiosClient.post("/dangky", {
-        maSV: "SV001",
-        maLHP: record.maLHP,
-        hocPhi: 1500000,
-      });
-
-      message.success("Đăng ký thành công");
-
-      loadCourses();
-    } catch (err) {
-      message.error("Đăng ký thất bại");
-    }
-  };
-
   const columns = [
     {
-      title: "Mã lớp",
-      dataIndex: "maLHP",
+      title: 'Mã lớp',
+      dataIndex: 'maLHP',
     },
     {
-      title: "Sĩ số",
+      title: 'Môn học',
+      dataIndex: 'tenMH',
+    },
+    {
+      title: 'Sĩ số',
       render: (_, record) => (
         <Progress
           percent={
@@ -61,16 +29,23 @@ function DangKyPage() {
       ),
     },
     {
-      title: "Đăng ký",
+      title: 'Trạng thái',
       render: (_, record) => (
-        <Button
-          type="primary"
-          disabled={
-            record.siSoHienTai >=
-            record.siSoToiDa
+        <Tag
+          color={
+            record.trangThai === 'Mở'
+              ? 'green'
+              : 'red'
           }
-          onClick={() => dangKy(record)}
         >
+          {record.trangThai}
+        </Tag>
+      ),
+    },
+    {
+      title: 'Action',
+      render: () => (
+        <Button type="primary">
           Đăng ký
         </Button>
       ),
@@ -83,7 +58,7 @@ function DangKyPage() {
         <Table
           rowKey="maLHP"
           columns={columns}
-          dataSource={courses}
+          dataSource={[]}
         />
       </Card>
     </MainLayout>
